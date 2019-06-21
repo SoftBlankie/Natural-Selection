@@ -28,8 +28,21 @@ class Creature {
 Creature::Creature(int screen_width, int screen_height) {
   // random pos around outer ring of screen
   double randX, randY;
-  randX = rand()%(screen_width-10+1)+10;
-  randY = screen_height-10;
+  if (rand()%2) {
+    randX = rand()%(screen_width-10+1)+10;
+    if (rand()%2) {
+      randY = screen_height-10;
+    } else {
+      randY = 2;
+    }
+  } else {
+    randY = rand()%(screen_height-10+1)+10;
+    if (rand()%2) {
+      randX = screen_width-10;
+    } else {
+      randX = 2;
+    }
+  }
   pos = std::complex<double>(randX,randY);
   show();
   vel = 0;

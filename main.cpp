@@ -1,8 +1,7 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <random>
 
-#include "entity.h"
+#include "population.h"
 
 class Natural {
   public:
@@ -19,17 +18,15 @@ class Natural {
     sf::RenderWindow window;
     bool isFullscreen;
 
-    Creature creature;
+    Population population;
 };
 
 Natural::Natural() : screen_width(1440), screen_height(900),
-  creature(screen_width, screen_height){
+  population(screen_width, screen_height, 100){
   title = "Natural Selection";
   window.create(sf::VideoMode(screen_width,screen_height,32), title, sf::Style::Fullscreen);
   window.setFramerateLimit(100);
   isFullscreen = true;
-
-  //creature = Creature(screen_width, screen_height);
 }
 
 void Natural::handleInputEvents() {
@@ -68,9 +65,10 @@ void Natural::run() {
 void Natural::draw() {
   window.clear(sf::Color::Black);
 
-  creature.show();
-  window.draw(creature.getShape());
-
+  population.show();
+  for (const auto& creature : population.getCreatures()) {
+    window.draw(creature.getShape());
+  }
   window.display();
 }
 
