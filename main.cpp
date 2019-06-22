@@ -5,7 +5,7 @@
 
 class Natural {
   public:
-    Natural();
+    Natural(int sizeC, int sizeF);
 
     void handleInputEvents();
 
@@ -21,8 +21,7 @@ class Natural {
     Population population;
 };
 
-Natural::Natural() : screen_width(1440), screen_height(900),
-  population(screen_width, screen_height, 100){
+Natural::Natural(int sizeC, int sizeF) : screen_width(1440), screen_height(900), population(screen_width, screen_height, sizeC, sizeF){
   title = "Natural Selection";
   window.create(sf::VideoMode(screen_width,screen_height,32), title, sf::Style::Fullscreen);
   window.setFramerateLimit(100);
@@ -69,12 +68,15 @@ void Natural::draw() {
   for (const auto& creature : population.getCreatures()) {
     window.draw(creature.getShape());
   }
+  for (const auto& food : population.getFoods()) {
+    window.draw(food.getShape());
+  }
   window.display();
 }
 
 int main() {
   srand(time(NULL));
-  Natural natural;
+  Natural natural(100,100);
   natural.run();
   return 0;
 }
