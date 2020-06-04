@@ -8,10 +8,11 @@ class Brain {
     Brain();
   private:
     std::vector<std::complex<double>> directions;
+    int step;
 };
 
-Brain::Brain() {
-  // get directions from A* algorithm
+Brain::Brain() : step(0) {
+  // get directions from pathing algorithm
 }
 
 #endif
